@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Update gcc / g++
+sudo ln -sf /usr/bin/g++-7 /usr/bin/g++
+sudo ln -sf /usr/bin/gcc-7 /usr/bin/gcc
+
+ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [[ $# -eq 0 ]]
+then
+    HARNESS_DIR=harness
+    APP_DIRS="img-dnn masstree moses shore silo specjbb sphinx xapian"
+else
+    APP_DIRS=$@
+fi
+
+for dir in ${HARNESS_DIR} ${APP_DIRS}
+do
+    echo "Building $dir"
+    cd ${ROOT}/${dir}
+    ./build.sh > build.log
+    EXIT_CODE=$?
+    if [[ $EXIT_CODE -ne 0 ]]
+    then
+        echo "WARNING: Building $dir returned error status $EXIT_CODE"
+    fi
+    cd -
+done
