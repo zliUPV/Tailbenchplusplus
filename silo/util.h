@@ -305,6 +305,12 @@ private:
   unsigned long seed;
 };
 
+template <typename T1, typename T2>
+std::ostream& operator<<(std::ostream& os, const std::pair<T1, T2>& p) {
+  os << "(" << p.first << ", " << p.second << ")";
+  return os;
+}
+
 template <typename ForwardIterator>
 std::string
 format_list(ForwardIterator begin, ForwardIterator end)

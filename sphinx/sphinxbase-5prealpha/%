@@ -1,0 +1,8 @@
+libtool: warning: relinking 'libsphinxad.la'
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+ModuleNotFoundError: No module named 'imp'
+make[3]: *** [Makefile:502: install-nodist_pkgpyexecPYTHON] Error 1
+make[2]: *** [Makefile:684: install-am] Error 2
+make[1]: *** [Makefile:437: install-recursive] Error 1
+make: *** [Makefile:480: install-recursive] Error 1

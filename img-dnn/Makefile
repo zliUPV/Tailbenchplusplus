@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS += -g -O3 $(shell pkg-config --cflags opencv) -std=c++0x
-LDFLAGS = $(shell pkg-config --libs opencv)
+CXXFLAGS += -g -O3 $(shell pkg-config --cflags opencv4) -std=c++0x
+LDFLAGS = $(shell pkg-config --libs opencv4)
 
 TBENCH_PATH = ../harness
 TBENCH_SERVER_OBJ = $(TBENCH_PATH)/tbench_server_networked.o

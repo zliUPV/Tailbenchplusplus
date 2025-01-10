@@ -41,11 +41,11 @@ resultProdict(const Mat &x, const vector<SA> &hLayers, const SMR &smr){
     }
     Mat M = smr.Weight * acti[acti.size() - 1];
     Mat tmp;
-    reduce(M, tmp, 0, CV_REDUCE_MAX);
+    reduce(M, tmp, 0, cv::REDUCE_MAX);
     M = M + repeat(tmp, M.rows, 1);
     Mat p;
     exp(M, p);
-    reduce(p, tmp, 0, CV_REDUCE_SUM);
+    reduce(p, tmp, 0, cv::REDUCE_SUM);
     divide(p, repeat(tmp, p.rows, 1), p);
     log(p, tmp);
     //cout<<tmp.t()<<endl;

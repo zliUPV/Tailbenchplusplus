@@ -109,7 +109,7 @@ sparseAutoencoderCost(SA &sa, cv::Mat &data, double lambda, double sparsityParam
     double err = sum(errtp)[0] / nsamples;
     // now calculate pj which is the average activation of hidden units
     cv::Mat pj;
-    reduce(acti.aHidden, pj, 1, CV_REDUCE_SUM);
+    reduce(acti.aHidden, pj, 1, cv::REDUCE_SUM);
     pj /= nsamples;
     // the second part is weight decay part
     double err2 = sum(sa.W1)[0] + sum(sa.W2)[0];
@@ -141,8 +141,8 @@ sparseAutoencoderCost(SA &sa, cv::Mat &data, double lambda, double sparsityParam
     delta2.copyTo(nablab1);
     sa.W1grad = nablaW1 / nsamples + lambda * sa.W1;
     sa.W2grad = nablaW2 / nsamples + lambda * sa.W2;
-    reduce(nablab1, sa.b1grad, 1, CV_REDUCE_SUM);
-    reduce(nablab2, sa.b2grad, 1, CV_REDUCE_SUM);
+    reduce(nablab1, sa.b1grad, 1, cv::REDUCE_SUM);
+    reduce(nablab2, sa.b2grad, 1, cv::REDUCE_SUM);
     sa.b1grad /= nsamples;
     sa.b2grad /= nsamples;
 }
@@ -186,12 +186,12 @@ softmaxRegressionCost(cv::Mat &x, cv::Mat &y, SMR &smr, double lambda){
     cv::Mat M = theta * x;
     cv::Mat temp, temp2;
     temp = cv::Mat::ones(1, M.cols, CV_64FC1);
-    reduce(M, temp, 0, CV_REDUCE_SUM);
+    reduce(M, temp, 0, cv::REDUCE_SUM);
     temp2 = repeat(temp, nclasses, 1);
     M -= temp2;
     exp(M, M);
     temp = cv::Mat::ones(1, M.cols, CV_64FC1);
-    reduce(M, temp, 0, CV_REDUCE_SUM);
+    reduce(M, temp, 0, cv::REDUCE_SUM);
     temp2 = repeat(temp, nclasses, 1);
     divide(M, temp2, M); 
     cv::Mat groundTruth = cv::Mat::zeros(nclasses, nsamples, CV_64FC1);
@@ -253,11 +253,11 @@ fineTuneNetworkCost(cv::Mat &x, cv::Mat &y, std::vector<SA> &hLayers, SMR &smr, 
     }
     cv::Mat M = smr.Weight * acti[acti.size() - 1];
     cv::Mat tmp;
-    reduce(M, tmp, 0, CV_REDUCE_MAX);
+    reduce(M, tmp, 0, cv::REDUCE_MAX);
     M = M + repeat(tmp, M.rows, 1);
     cv::Mat p;
     exp(M, p);
-    reduce(p, tmp, 0, CV_REDUCE_SUM);
+    reduce(p, tmp, 0, cv::REDUCE_SUM);
     divide(p, repeat(tmp, p.rows, 1), p);
 
     cv::Mat groundTruth = cv::Mat::zeros(nclasses, nsamples, CV_64FC1);
@@ -285,7 +285,7 @@ fineTuneNetworkCost(cv::Mat &x, cv::Mat &y, std::vector<SA> &hLayers, SMR &smr, 
     for(int i=SparseAutoencoderLayers - 1; i >=0; i--){
         hLayers[i].W1grad = delta[i + 1] * acti[i].t();
         hLayers[i].W1grad /= nsamples;
-        reduce(delta[i + 1], tmp, 1, CV_REDUCE_SUM);
+        reduce(delta[i + 1], tmp, 1, cv::REDUCE_SUM);
         hLayers[i].b1grad = tmp / nsamples;
     }
     acti.clear();
