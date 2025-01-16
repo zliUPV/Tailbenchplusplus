@@ -1,6 +1,6 @@
 # Tailbench++
-It is an expanded version of Tailbench, which does not restrict the number of clients before hand. Therefore, the server will treat an undefined number
-of clients. All the modifications are only applicable to the Networked version. 
+It is an expanded version of Tailbench, which does not restrict the number of clients before hand. Therefore, the server will treat an undefined number of clients. 
+All the modifications are only applicable to the Networked version. 
 
 ## Installation process
 This section describe the process to compile Tailbench++. 
@@ -26,20 +26,31 @@ Tailbench++ code can be divided into 9 parts in their own directories:
 - xapian 
 
 Each part has each own `build.sh` script, which does all the compilation. However, some parts need additional steps before executing the script. 
-#### harness
-It is the part that must be compile before the others. `Makefile.config` should be configured to compile all the java languages files, specifying the JDK_PATH. It is located in the `Tailbenchplusplus` directory. 
+
+#### Configuration
+In Tailbenchplusplus directory, there is a file named `configs.sh` which need to be modified to specify the location of the data directory, the JDK_PATH, and scratch directory to save temporary files during execution of some applications. 
 ```bash
-# Example of JDK_PATH in Makefile.config 
-JDK_PATH=/usr/lib/jvm/java-8-openjdk-amd64
+ DATA_ROOT=/PATH/TO/TAILBENCH/DATASET/FOLDER #location of tailbench.inputs directory
+ JDK_PATH=/PATH/TO/JAVA/JDK #normally /usr/lib/jvm/java-8-openjdk-amd64/
+ SCRATCH_DIR=/PATH/TO/SCRATCH/FOLDER #the directory could be any folder you create
+
 ```
+Another file `Makefile.config`, which is also located on the main directory, should have the JDK_PATH.
+
+Theses configurations should be done before compiling the code. 
+
+#### harness
+It is the part that must be compile before the others the others applications. 
+
 #### masstree
-if a problem arisess because of not finding `config.h` file:
+if a problem arises because of not finding `config.h` file:
 ```bash
 ./configure 
 ```
 #### sphinx
 Before executing `build.sh` scripts, the following steps should be made.  
-Compilation of sphinxbase library 
+
+1. Compilation of sphinxbase library: 
 ```bash
 # compile sphinxbase 
 tar -xvf sphinxbase-5prealpha.tar.gz 
@@ -49,7 +60,7 @@ sudo ./configure
 sudo make -j$(nproc)
 sudo make install
 ```
-Compilation of pocketsphinx library
+2. Compilation of pocketsphinx library
 ```bash
 tar -xvf pocketsphinx-5prealpha.tar.gz 
 cd pocketsphinx-5prealpha
@@ -70,17 +81,10 @@ sudo make install
 ```
 ### Input files and Data 
 Download the dataset used by the Tailbenchplusplus from [Tailbench Dataset](https://tailbench.csail.mit.edu/tailbench.inputs.tgz). 
+The location of the data should be specified on the `configs.sh` as the DATA_ROOT variable. 
 ```bash
 wget https://tailbench.csail.mit.edu/tailbench.inputs.tgz
 tar tailbench.inputs.tgz -C DESTINATION
-```
-## Configuration
-In Tailbenchplusplus directory, there is a file named `configs.sh` which need to be modified to specify the location of the data directory, the JDK_PATH, and scratch directory to save temporary files during execution of some applications. 
-```bash
- DATA_ROOT=/PATH/TO/TAILBENCH/DATASET/FOLDER #location of tailbench.inputs directory
- JDK_PATH=/PATH/TO/JAVA/JDK #normally /usr/lib/jvm/java-8-openjdk-amd64/
- SCRATCH_DIR=/PATH/TO/SCRATCH/FOLDER #the directory could be any folder you create
-
 ```
 ## Environment variables
 
@@ -133,7 +137,6 @@ TBENCH_SERVER=127.0.0.1 TBENCH_SERVER_PORT=8080 TBENCH_WARMUPREQS=1000 TBENCH_MA
 
 *Note*: 
 - if you want to run shore client and server localhost, use `run_networked_client_loopback.sh` to initialize clients. 
-
 
 ## Additional notes
 There are two main branches, `main` and `branch_to_ubuntu24`. The main branch functions on Ubuntu 18, while the second branch is an modification of the first one to adapt the benchmark suite to be compilable on newer operating systems. So far, we have succeed in compiling 7 out of 8 applications, which are xapian, img-dnn, masstree, shore, sphinx, silo and specjbb.
