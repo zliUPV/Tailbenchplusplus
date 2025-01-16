@@ -50,7 +50,7 @@ class HypothesisQueue {
  private:
   struct HypothesisOrderer {
     bool operator()(BleuIndexPair a,
-                     BleuIndexPair b) {
+                     BleuIndexPair b) const {
       return (a.first > b.first);
     }
   };

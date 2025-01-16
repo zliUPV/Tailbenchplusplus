@@ -214,7 +214,8 @@ void ProbingVocabulary::LoadedBinary(bool have_words, int fd, EnumerateVocab *to
   if (have_words) ReadWords(fd, to, bound_);
 }
 
-void MissingUnknown(const Config &config) throw(SpecialWordMissingException) {
+//void MissingUnknown(const Config &config) throw(SpecialWordMissingException) {
+void MissingUnknown(const Config &config) {
   switch(config.unknown_missing) {
     case SILENT:
       return;
@@ -226,7 +227,8 @@ void MissingUnknown(const Config &config) throw(SpecialWordMissingException) {
   }
 }
 
-void MissingSentenceMarker(const Config &config, const char *str) throw(SpecialWordMissingException) {
+//void MissingSentenceMarker(const Config &config, const char *str) throw(SpecialWordMissingException) {
+void MissingSentenceMarker(const Config &config, const char *str) {
   switch (config.sentence_marker_missing) {
     case SILENT:
       return;

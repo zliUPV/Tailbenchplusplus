@@ -125,10 +125,13 @@ protected:
   NonTerminalMap m_nonTermMap;
   TargetPhraseCollection *m_targetPhraseCollection;
 
+  /*PhraseDictionaryNodeSCFG()
+    :m_targetPhraseCollection(NULL)
+  {}*/
+public:
   PhraseDictionaryNodeSCFG()
     :m_targetPhraseCollection(NULL)
   {}
-public:
   virtual ~PhraseDictionaryNodeSCFG();
 
   bool IsLeaf() const {

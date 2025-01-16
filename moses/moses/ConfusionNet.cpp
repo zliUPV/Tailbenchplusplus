@@ -73,7 +73,7 @@ ConfusionNet::ConfusionNet(Sentence const& s)
 {
   data.resize(s.GetSize());
   for(size_t i=0; i<s.GetSize(); ++i)
-    data[i].push_back(std::make_pair(s.GetWord(i),0.0));
+    data[i].push_back(std::make_pair(s.GetWord(i),std::vector<float>{0.0f}));
 }
 
 bool ConfusionNet::ReadF(std::istream& in,

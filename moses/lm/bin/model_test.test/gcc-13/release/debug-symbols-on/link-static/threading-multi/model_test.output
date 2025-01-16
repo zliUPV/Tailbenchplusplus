@@ -1,0 +1,35 @@
+Boost.Test WARNING: token "lm/test.arpa" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: model_test --random -- lm/test.arpa
+Boost.Test WARNING: token "lm/test_nounk.arpa" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: model_test --random -- lm/test_nounk.arpa
+Running 12 test cases...
+unknown location(0): [4;31;49mfatal error: in "trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "quant_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "bhiksha_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "quant_bhiksha_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "write_and_read_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "write_and_read_quant_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "write_and_read_array_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "write_and_read_quant_array_trie": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/model_test.cc(304): [1;36;49mlast checkpoint[0;39;49m
+
+[1;31;49m*** 8 failures are detected in the test module "ModelTest"
+[0;39;49m
+EXIT STATUS: 201

@@ -8,7 +8,7 @@
 #define ENDIAN_LITTLE 1
 
 /* Define to enable debugging assertions. */
-/* #undef HAVE_ASSERTIONS_ENABLED */
+#define HAVE_ASSERTIONS_ENABLED 1
 
 /* Define to 1 if you have the `clock_gettime' function. */
 #define HAVE_CLOCK_GETTIME 1
@@ -52,7 +52,7 @@
 /* #undef HAVE_INVARIANTS_ENABLED */
 
 /* Define if you are using libjemalloc for malloc. */
-/* #undef HAVE_JEMALLOC */
+#define HAVE_JEMALLOC 1
 
 /* Define if you have libnuma. */
 #define HAVE_LIBNUMA 1
@@ -118,7 +118,7 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define if you are using libtcmalloc for malloc. */
-#define HAVE_TCMALLOC 1
+/* #undef HAVE_TCMALLOC */
 
 /* Define to 1 if you have the <time.h> header file. */
 #define HAVE_TIME_H 1

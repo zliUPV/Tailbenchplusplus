@@ -6,7 +6,7 @@ CFLAGS = -g -W -Wall -O2 -I$(TBENCHDIR)
 DEPSDIR := .deps
 DEPCFLAGS = -MD -MF $(DEPSDIR)/$*.d -MP
 ifeq ($(strip $(MEMMGR)), )
-  MEMMGR = -ltcmalloc_minimal
+  MEMMGR = -ljemalloc
 endif
 ifneq ($(strip $(KEYSWAP)), )
   CFLAGS += -DKEYSWAP
@@ -82,7 +82,7 @@ configure config.h.in: configure.ac
 	touch config.h.in
 
 config.status: configure
-	./configure  '--disable-assertions' '--with-malloc=tcmalloc'
+	./configure 
 
 $(DEPSDIR)/stamp:
 	mkdir -p $(DEPSDIR)

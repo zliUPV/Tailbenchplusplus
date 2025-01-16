@@ -10,9 +10,10 @@
 #include "common.h"
 #include "tbench_server.h"
 
-#include "opencv2/core/core.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
+#include <opencv2/core/persistence.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 #include <unistd.h>
 #include <math.h>
@@ -67,7 +68,7 @@ resultProdict(const Mat &x, const vector<SA> &hLayers, const SMR &smr){
 }
 
 void loadModel(SMR& smr, vector<SA>& HiddenLayers, string modelFile) {
-    FileStorage fs(modelFile, FileStorage::READ);
+  FileStorage fs(modelFile, FileStorage::READ);
 
     FileNode smrNode = fs["smr"];
     smrNode["Weight"] >> smr.Weight;
@@ -210,7 +211,8 @@ main(int argc, char** argv)
 
     vector<SA> HiddenLayers;
     SMR smr;
-
+    cout << modelFile << endl;
+    cout << nThreads << endl;
     loadModel(smr, HiddenLayers, modelFile);
 
     tBenchServerInit(nThreads);

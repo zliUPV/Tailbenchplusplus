@@ -96,6 +96,20 @@ template <class KeyIter, class ValueIter> class JointProxy {
     InnerIterator inner_;
 };
 
+//lvalues 
+template <class KeyIter, class ValueIter>
+void swap(JointProxy<KeyIter, ValueIter> &a, JointProxy<KeyIter, ValueIter> &b) noexcept {
+  a.swap(b);
+}
+
+//rvalues 
+template <class KeyIter, class ValueIter>
+void swap(JointProxy<KeyIter, ValueIter> &&a, JointProxy<KeyIter, ValueIter> &&b) {
+  JointProxy<KeyIter, ValueIter> temp = std::move(a);
+  a = std::move(b);
+  b = std::move(temp);
+}
+
 template <class Proxy, class Less> class LessWrapper : public std::binary_function<const typename Proxy::value_type &, const typename Proxy::value_type &, bool> {
   public:
     explicit LessWrapper(const Less &less) : less_(less) {}

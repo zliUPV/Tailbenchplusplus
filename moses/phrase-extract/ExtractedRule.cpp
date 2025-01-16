@@ -17,7 +17,7 @@ void ExtractedRule::OutputNTLengths(std::ostream &out) const
 {
   ostringstream outString;
   OutputNTLengths(outString);
-  out << outString;
+  out << outString.str();
 }
 
 void ExtractedRule::OutputNTLengths(std::ostringstream &outString) const

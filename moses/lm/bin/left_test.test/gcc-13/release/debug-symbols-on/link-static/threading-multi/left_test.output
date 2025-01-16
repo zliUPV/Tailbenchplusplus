@@ -1,0 +1,20 @@
+Boost.Test WARNING: token "lm/test.arpa" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: left_test --random -- lm/test.arpa
+Running 6 test cases...
+unknown location(0): [4;31;49mfatal error: in "TrieAll": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/left_test.cc(375): [1;36;49mlast checkpoint: "TrieAll" test entry[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "QuantTrieAll": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/left_test.cc(378): [1;36;49mlast checkpoint: "QuantTrieAll" test entry[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "ArrayQuantTrieAll": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/left_test.cc(381): [1;36;49mlast checkpoint: "ArrayQuantTrieAll" test entry[0;39;49m
+unknown location(0): [4;31;49mfatal error: in "ArrayTrieAll": lm::SpecialWordMissingException: lm/vocab.cc:239 in void lm::ngram::MissingSentenceMarker(const Config&, const char*) threw SpecialWordMissingException'.
+The ARPA file is missing </s> and the model is configured to reject these models.  Run build_binary -s to disable this check. Byte: 955 File: lm/test.arpa[0;39;49m
+lm/left_test.cc(384): [1;36;49mlast checkpoint: "ArrayTrieAll" test entry[0;39;49m
+
+[1;31;49m*** 4 failures are detected in the test module "LeftTest"
+[0;39;49m
+EXIT STATUS: 201

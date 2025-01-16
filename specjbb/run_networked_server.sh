@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${DIR}/../configs.sh
 
 # Setup commands
@@ -16,18 +16,13 @@ export CLASSPATH=./build/dist/jbb.jar:./build/dist/check.jar:${TBENCH_PATH}/tben
 export PATH=${JDK_PATH}/bin:${PATH}
 
 SERVER_PORT=${1}
-WUP_REQ=${2}
-MAX_REQ=${3}
-THREADS=${4}
+THREADS=${2}
 
 export TBENCH_SERVER_PORT=${SERVER_PORT}
-export TBENCH_MAXREQS=${MAX_REQ} 
-export TBENCH_WARMUPREQS=${WUP_REQ}
 export TBENCH_MINSLEEPNS=10000
 
-if [[ -d libtbench_jni.so ]] 
-then
-    rm libtbench_jni.so
+if [[ -d libtbench_jni.so ]]; then
+  rm libtbench_jni.so
 fi
 ln -sf libtbench_networked_jni.so libtbench_jni.so
 
@@ -38,8 +33,6 @@ echo "[SERVER] : STARTED. Clients can start now."
 wait $!
 echo "[SERVER] : FINISHED"
 
-
 rm libtbench_jni.so
 rm gc.log
 rm -r results
-

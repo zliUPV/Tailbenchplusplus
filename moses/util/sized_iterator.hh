@@ -43,6 +43,20 @@ class SizedInnerIterator {
 class SizedProxy {
   public:
     SizedProxy() {}
+    
+    SizedProxy(const SizedProxy &other) : inner_(other.inner_) {}
+
+    friend void swap(SizedProxy &a, SizedProxy &b) {
+      using std::swap;
+      swap(a.inner_, b.inner_);
+    }
+    
+    friend void swap(SizedProxy &&a, SizedProxy &&b) {
+      using std::swap;
+      std::swap(a.inner_, b.inner_);
+    }
+
+    SizedProxy(SizedProxy &&other) noexcept : inner_(std::move(other.inner_)) {}
 
     SizedProxy(void *ptr, std::size_t size) : inner_(ptr, size) {}
 
@@ -57,6 +71,13 @@ class SizedProxy {
 
     SizedProxy &operator=(const std::string &from) {
       memcpy(inner_.Data(), from.data(), inner_.EntrySize());
+      return *this;
+    }
+
+    SizedProxy &operator=(SizedProxy &&other) noexcept {
+      if(this != &other) {
+        inner_ = std::move(other.inner_);
+      }
       return *this;
     }
 

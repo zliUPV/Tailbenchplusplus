@@ -42,14 +42,26 @@ template <class Proxy> class ProxyIterator {
     typedef Proxy * pointer;
 
     ProxyIterator() {}
+    //copy constructor
+    ProxyIterator(const ProxyIterator &other) : p_(other.p_) {}
+    
+    //move constructor
+    ProxyIterator(ProxyIterator &&other) noexcept : p_(std::move(other.p_)) {}
 
     // For cast from non const to const.  
     template <class AlternateProxy> ProxyIterator(const ProxyIterator<AlternateProxy> &in) : p_(*in) {}
     explicit ProxyIterator(const Proxy &p) : p_(p) {}
-
+    
     // p_'s operator= does value copying, but here we want iterator copying.  
     S &operator=(const S &other) {
       I() = other.I();
+      return *this;
+    }
+
+    S &operator=(S &&other) noexcept {
+      if (this != &other) {
+        p_ = std::move(other.p_);
+      }
       return *this;
     }
 
@@ -72,7 +84,7 @@ template <class Proxy> class ProxyIterator {
 
     std::ptrdiff_t operator-(const S &other) const { return I() - other.I(); }
 
-    Proxy operator*() { return p_; }
+    Proxy operator*() { return std::move(p_); }
     const Proxy operator*() const { return p_; }
     Proxy *operator->() { return &p_; }
     const Proxy *operator->() const { return &p_; }

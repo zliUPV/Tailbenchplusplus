@@ -1,0 +1,8 @@
+Boost.Test WARNING: token "util/file_piece.cc" does not correspond to the Boost.Test argument 
+                    and should be placed after all Boost.Test arguments and the -- separator.
+                    For example: file_piece_test --random -- util/file_piece.cc
+Running 5 test cases...
+
+[1;32;49m*** No errors detected
+[0;39;49m
+EXIT STATUS: 0

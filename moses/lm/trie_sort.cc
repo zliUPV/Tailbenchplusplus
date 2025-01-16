@@ -32,9 +32,43 @@ class PartialViewProxy {
     PartialViewProxy() : attention_size_(0), inner_() {}
 
     PartialViewProxy(void *ptr, std::size_t block_size, std::size_t attention_size) : attention_size_(attention_size), inner_(ptr, block_size) {}
+    
+    //Copy constructor
+    PartialViewProxy(const PartialViewProxy& other)
+      : attention_size_(other.attention_size_), inner_(other.inner_) {}
+
+    //Move constructor 
+    PartialViewProxy(PartialViewProxy&& other) noexcept
+      : attention_size_(other.attention_size_), inner_(std::move(other.inner_)) {}
 
     operator std::string() const {
       return std::string(reinterpret_cast<const char*>(inner_.Data()), attention_size_);
+    }
+    
+    //Move assigment operator
+    PartialViewProxy& operator=(PartialViewProxy&& other) noexcept {
+      if(this != &other) {
+        inner_ = std::move(other.inner_);
+        const_cast<std::size_t&>(attention_size_) = other.attention_size_;
+      }
+      return *this;
+    }
+
+    //adding code to adapt it to gcc13 g++13 
+    friend void swap(PartialViewProxy& a, PartialViewProxy &b) {
+      using std::swap;
+      swap(a.inner_, b.inner_);
+      std::size_t temp = a.attention_size_;
+      const_cast<std::size_t&>(a.attention_size_) = b.attention_size_;
+      const_cast<std::size_t&>(b.attention_size_) = temp;
+    }
+    
+    friend void swap(PartialViewProxy&& a, PartialViewProxy&& b) noexcept {
+      using std::swap;
+      swap(a.inner_, b.inner_);
+      std::size_t temp = a.attention_size_;
+      const_cast<std::size_t&>(a.attention_size_) = b.attention_size_;
+      const_cast<std::size_t&>(b.attention_size_) = temp;
     }
 
     PartialViewProxy &operator=(const PartialViewProxy &from) {

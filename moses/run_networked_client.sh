@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DIR="$(cd "$(dirname "${BASH_SOURCEE[0]}")" && pwd)"
+source ../configs.sh
+
+SERVER=${1}
+SERVER_PORT=${2}
+WARMUP=${3}
+MAXREQ=${4}
+QPS=${5}
+THREADS=${6}
+
+BINDIR=./bin
+
+TBENCH_WARMUPREQS=${WARMUP} TBENCH_MAXREQS=${MAXREQ} TBENCH_SERVER=${SERVER} \
+  TBENCH_SERVER_PORT=${SERVER_PORT} TBENCH_CLIENT_THREADS=${THREADS} TBENCH_QPS=${QPS} TBENCH_MINSLEEPNS=10000 \
+  chrt -r 99 ${BINDIR}/moses_client_networked &
+
+echo "[CLIENT] : STARTED"
+wait $!
+echo "[CLIENT] : FINISHED"

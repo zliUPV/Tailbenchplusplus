@@ -49,11 +49,14 @@ protected:
   NodeMap m_map;
   TargetPhraseCollection *m_targetPhraseCollection;
 
-  PhraseDictionaryNode()
+  /*PhraseDictionaryNode()
     :m_targetPhraseCollection(NULL)
-  {}
+  {}*/ 
 public:
   ~PhraseDictionaryNode();
+  PhraseDictionaryNode() 
+    :m_targetPhraseCollection(NULL)
+  {}
 
   void Sort(size_t tableLimit);
   PhraseDictionaryNode *GetOrCreateChild(const Word &word);
