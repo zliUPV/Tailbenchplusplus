@@ -231,9 +231,9 @@ class io_m : public smlevel_0
                     lock_mode_t             m, 
                     lock_duration_t         d, 
                     timeout_in_ms           timeout,  
-                    lock_mode_t*            prev_mode = 0, 
-                    lock_mode_t*            prev_pgmode = 0, 
-                    lockid_t**              nameInLockHead = 0 
+                    lock_mode_t*            prev_mode, 
+                    lock_mode_t*            prev_pgmode, 
+                    lockid_t**              nameInLockHead 
                     );
 public:
     NORET                       io_m();

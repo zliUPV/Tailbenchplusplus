@@ -3310,6 +3310,7 @@ echo configure args: $* > tmpcfg.txt
 ## 'foreign' says that we don't follow all GNU standards
 ## For some reason, dependency tracking is not enabled by default
 ## on our Solaris box.
+##AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 am__api_version='1.16'
 
 
@@ -3926,7 +3927,6 @@ END
     as_fn_error $? "Your 'rm' program is bad, sorry." "$LINENO" 5
   fi
 fi
-
 
 ## This package uses an assembler.
 ## Define CCAS and CCASFLAGS 
@@ -5313,7 +5313,7 @@ else
 fi
 
 
-
+##AM_PROG_AR 
 # Checks for programs.
 ## preprocessor required
 

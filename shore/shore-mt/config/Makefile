@@ -229,14 +229,14 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/shore-config-h.in \
 	$(top_srcdir)/Makefile.generic $(top_srcdir)/Makefile.local \
-	compile depcomp install-sh missing
+	ar-lib compile depcomp install-sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = aclocal-1.16
+ACLOCAL = ${SHELL} '/home/master/Documents/Tailbenchplusplus/shore/shore-mt/config/missing' aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = autoconf
-AUTOHEADER = autoheader
-AUTOMAKE = automake-1.16
+AUTOCONF = ${SHELL} '/home/master/Documents/Tailbenchplusplus/shore/shore-mt/config/missing' autoconf
+AUTOHEADER = ${SHELL} '/home/master/Documents/Tailbenchplusplus/shore/shore-mt/config/missing' autoheader
+AUTOMAKE = ${SHELL} '/home/master/Documents/Tailbenchplusplus/shore/shore-mt/config/missing' automake-1.16
 AWK = gawk
 CC = gcc
 CCAS = gcc
@@ -275,7 +275,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -lrt 
 LTLIBOBJS = 
-MAKEINFO = makeinfo
+MAKEINFO = ${SHELL} '/home/master/Documents/Tailbenchplusplus/shore/shore-mt/config/missing' makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
 PACKAGE = shore-storage-manager
