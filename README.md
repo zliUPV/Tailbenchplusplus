@@ -9,6 +9,13 @@ This section describe the process to compile Tailbench++.
 ```bash
   sudo apt-get install build-essential make gcc g++ pkg-config libopencv-dev libboost-all-dev libgoogle-perftools-dev libssl-dev ant uuid-dev
   sudo apt-get install bison swig openjdk-8-jdk-headless libnuma-dev libdb5.3++-dev libmysqld-dev libaio-dev libgtop2-dev libreadline-dev libncurses5-dev libncursesw5-dev
+  
+  # to install python3.9
+  sudo apt-get update
+  sudo apt-get install software-properties-common -y
+  sudo add-apt-repository ppa:deadsnakes/ppa -y
+  sudo apt-get update
+
   sudo apt-get install autoconf python3.9 python3-pip libjemalloc-dev
   sudo apt-get install automake zlib1g-dev cmake wget libnsl-dev  
   pip install numpy scipy
