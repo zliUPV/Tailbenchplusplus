@@ -16,7 +16,7 @@ This section describe the process to compile Tailbench++.
   sudo add-apt-repository ppa:deadsnakes/ppa -y
   sudo apt-get update
 
-  sudo apt-get install autoconf python3.9 python3-pip libjemalloc-dev
+  sudo apt-get install autoconf python3.9 python3.9-dev python3-pip libjemalloc-dev
   sudo apt-get install automake zlib1g-dev cmake wget libnsl-dev  
   pip install numpy scipy
 ```
@@ -81,9 +81,9 @@ Before executing `build.sh` script, the following steps should be made.
 ```bash
 tar -xvf xapian-core-1.2.13 
 cd xapian-core-1.2.13 
-sudo ./configure 
+./configure 
 sed -i 's/CXX = g++/CXX = g++ -std=c++03/g' Makefile 
-sudo make -j$(nproc)
+make -j$(nproc)
 sudo make install
 ```
 ### Input files and Data 
