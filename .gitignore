@@ -2,3 +2,6 @@
 *.log
 ./*/bin
 *.bin
+sphinx/sphinxbase-5prealpha
+sphinx/pocketsphinx-5prealpha
+xapian/xapian-core-1.2.13
