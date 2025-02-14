@@ -9,7 +9,7 @@ This section describe the process to compile Tailbench++.
 ```bash
   sudo apt-get install build-essential make gcc g++ pkg-config libopencv-dev libboost-all-dev libgoogle-perftools-dev libssl-dev ant uuid-dev
   sudo apt-get install bison swig openjdk-8-jdk-headless libnuma-dev libdb5.3++-dev libmysqld-dev libaio-dev libgtop2-dev libreadline-dev libncurses5-dev libncursesw5-dev
-  
+  sudo apt-get install liblapack-dev
   # to install python3.9
   sudo apt-get update
   sudo apt-get install software-properties-common -y
@@ -18,7 +18,7 @@ This section describe the process to compile Tailbench++.
 
   sudo apt-get install autoconf python3.9 python3.9-dev python3-pip libjemalloc-dev
   sudo apt-get install automake zlib1g-dev cmake wget libnsl-dev  
-  pip install numpy scipy
+  pip install numpy scipy setuptools
 ```
 ### Building
 Tailbench++ code can be divided into 9 parts in their own directories:
@@ -33,6 +33,14 @@ Tailbench++ code can be divided into 9 parts in their own directories:
 - xapian 
 
 Each part has each own `build.sh` script, which does all the compilation. However, some parts need additional steps before executing the script. 
+
+### Input files and Data 
+Download the dataset used by the Tailbenchplusplus from [Tailbench Dataset](https://tailbench.csail.mit.edu/tailbench.inputs.tgz). 
+The location of the data should be specified on the `configs.sh` as the DATA_ROOT variable. 
+```bash
+wget https://tailbench.csail.mit.edu/tailbench.inputs.tgz
+tar tailbench.inputs.tgz -C DESTINATION
+```
 
 #### Configuration
 In Tailbenchplusplus directory, there is a file named `configs.sh` which need to be modified to specify the location of the data directory, the JDK_PATH, and scratch directory to save temporary files during execution of some applications. 
@@ -86,13 +94,7 @@ sed -i 's/CXX = g++/CXX = g++ -std=c++03/g' Makefile
 make -j$(nproc)
 sudo make install
 ```
-### Input files and Data 
-Download the dataset used by the Tailbenchplusplus from [Tailbench Dataset](https://tailbench.csail.mit.edu/tailbench.inputs.tgz). 
-The location of the data should be specified on the `configs.sh` as the DATA_ROOT variable. 
-```bash
-wget https://tailbench.csail.mit.edu/tailbench.inputs.tgz
-tar tailbench.inputs.tgz -C DESTINATION
-```
+
 ## Environment variables
 
 **TBENCH_WARMUPREQS**: This variable specifies the number of requests during the warmup. During the warmup time, latency is not measured. The variable have to be passed to the client module. 
