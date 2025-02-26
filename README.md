@@ -97,36 +97,36 @@ sudo make install
 
 ## Environment variables
 
-**TBENCH_WARMUPREQS**: This variable specifies the number of requests during the warmup. During the warmup time, latency is not measured. The variable have to be passed to the client module. 
+**TBENCH_WARMUPREQS**: This variable specifies the number of requests during the warmup. During the warmup time, latency is not measured. The variable has to be passed to the client module. 
 
-**TBENCH_MAXREQS**: It represents the number of requests to be execute during measurement time. It must be passed to the client module when it is executed. 
+**TBENCH_MAXREQS**: It represents the number of requests to be executed during measurement time. It must be passed to the client module when it is executed. 
 
-**TBENCH_MINSLEEPNS**: It is the minimum length of tiem, in ns, for which the client sleeps in the kernel upon encountering an idle period. 
+**TBENCH_MINSLEEPNS**: It is the minimum length of time, in ns, for which the client sleeps in the kernel upon encountering an idle period. 
 
 **TBENCH_RANDSEED**: Seed for the random number generator that generates interarrival times.
 
-**TBENCH_CLIENT_THREADS**: The numbers of threads used by the client to generate the requests. Although the request rate is defined by **TBENCH_QPS**, this variable is useful when a single client cannot reach to the rate specified. 
+**TBENCH_CLIENT_THREADS**: The number of threads used by the client to generate the requests. Although the request rate is defined by **TBENCH_QPS**, this variable is useful when a single client cannot reach to the rate specified. 
 
-**TBENCH_SERVER**: This variable specifies the URL or IP of the server. Default value is localhost.
+**TBENCH_SERVER**: This variable specifies the server's URL or IP. The default value is localhost.
 
 **TBENCH_SERVER_PORT**: It is the port through which the server listens. Default value 8080.
 
 **TBENCH_QPS**: It represents the average request per second. It must be passed to the client module. 
 
-**TBENCH_VARQPS**: This variable could have 3 values (0, 1 and 2). When the variable is not 0, the client will vary it request rate dinamically during execution. When 1, variables **TBENCH_INIQPS** and **TBENCH_STEPQPS** must be specified. When 2, variables **TBENCH_INIQPS**, **TBENCH_INTERVALQPS**, **TBENCH_QPS_1**, **TBENCH_QPS_2**, **TBENCH_QPS_3** and **TBENCH_QPS_4** must be specified. 
+**TBENCH_VARQPS**: This variable could have 3 values (0, 1 and 2). When the variable is not 0, the client will vary its request rate dynamically during execution. When 1, variables **TBENCH_INIQPS** and **TBENCH_STEPQPS** must be specified. When 2, variables **TBENCH_INIQPS**, **TBENCH_INTERVALQPS**, **TBENCH_QPS_1**, **TBENCH_QPS_2**, **TBENCH_QPS_3** and **TBENCH_QPS_4** must be specified. 
 
-**TBENCH_STEPQPS**: This parameter represents the number of queries that the rate of requests will increase after each request. It is only effective when **TBENCH_VARQPS** == 1. 
+**TBENCH_STEPQPS**: This parameter represents the number of queries , andthe rate of requests will increase after each request. It is only effective when **TBENCH_VARQPS** == 1. 
 
 **TBENCH_INTERVALQPS**: This variable indicates how many requests the client will vary the rate of requests. In other words, it indicates the period of time during which the QPS is stable. The variable is proportional to the actual rate. We only need to specify a first value for **TBENCH_INIQPS**, when the rate is changed during execution, the interval is recalculated. 
 
-**TBENCH_INIQPS**: It is the initial rate of queries, when client is configure to vary its rate of requests during execution. 
+**TBENCH_INIQPS**: It is the initial rate of queries when the client is configured to vary its rate of requests during execution. 
 
-**TBENCH_QPS_X**(1,2,3,4): This variables represents additional rates of requests when **TBENCH_VARQPS**==2. The client starts with **TBENCH_INIQPS**, after completing **TBENCH_INTERVALQPS** queries, it will change to **TBENCH_QPS_1** and **TBENCH_INTERVALQPS** is updated to make the client stay on this rate the same time as the previous request rate. The client cyclically loops through TBENCH_INIQPS and TBENCH_QPS_X values. TBENCH_INIQPS -> TBENCH_QPS_1 -> TBENCH_QPS_2 -> TBENCH_QPS_3 -> TBENCH_QPS_4 -> TBENCH_INIQPS -> TBENCH_QPS_1 .....
+**TBENCH_QPS_X**(1,2,3,4): This variable represents additional rates of requests when **TBENCH_VARQPS**==2. The client starts with **TBENCH_INIQPS**; after completing **TBENCH_INTERVALQPS** queries, it will change to **TBENCH_QPS_1**, and **TBENCH_INTERVALQPS** is updated to make the client stay on this rate the same time as the previous request rate. The client cyclically loops through TBENCH_INIQPS and TBENCH_QPS_X values. TBENCH_INIQPS -> TBENCH_QPS_1 -> TBENCH_QPS_2 -> TBENCH_QPS_3 -> TBENCH_QPS_4 -> TBENCH_INIQPS -> TBENCH_QPS_1 .....
 
 
 ## How to run 
 
-On each application directory there 2 example scripts, `run_networked_server.sh` and `run_networked_client.sh`, which show how to run each application.
+On each application directory, there 2 example scripts, `run_networked_server.sh` and `run_networked_client.sh`, which show how to run each application.
 
 To run a client that can vary its request rate, here you have an example with `xapian` in the two types of request rate variation:
 ```bash
