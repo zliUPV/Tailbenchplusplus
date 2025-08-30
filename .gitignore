@@ -5,3 +5,6 @@
 sphinx/sphinxbase-5prealpha
 sphinx/pocketsphinx-5prealpha
 xapian/xapian-core-1.2.13
+
+*/.DS_Store
+*.DS_Store
