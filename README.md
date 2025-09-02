@@ -144,8 +144,6 @@ TBENCH_SERVER=127.0.0.1 TBENCH_SERVER_PORT=8080 TBENCH_WARMUPREQS=1000 TBENCH_MA
 
 ```
 
-*Note*: 
-- if you want to run shore client and server localhost, use `run_networked_client_loopback.sh` to initialize clients. 
 
 ## Additional notes
 There are two main branches, `main` and `branch_to_ubuntu24`. The main branch functions on Ubuntu 18, while the second branch is an modification of the first one to adapt the benchmark suite to be compilable on newer operating systems. So far, we have succeed in compiling 7 out of 8 applications, which are xapian, img-dnn, masstree, shore, sphinx, silo and specjbb.
