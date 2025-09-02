@@ -16,13 +16,13 @@ export CLASSPATH=./build/dist/jbb.jar:./build/dist/check.jar:${TBENCH_PATH}/tben
 export PATH=${JDK_PATH}/bin:${PATH}
 
 SERVER_PORT=${1}
-WUP_REQ=${2}
-MAX_REQ=${3}
+#WUP_REQ=${2}
+#MAX_REQ=${3}
 THREADS=${4}
 
 export TBENCH_SERVER_PORT=${SERVER_PORT}
-export TBENCH_MAXREQS=${MAX_REQ} 
-export TBENCH_WARMUPREQS=${WUP_REQ}
+#export TBENCH_MAXREQS=${MAX_REQ} 
+#export TBENCH_WARMUPREQS=${WUP_REQ}
 export TBENCH_MINSLEEPNS=10000
 
 if [[ -d libtbench_jni.so ]] 

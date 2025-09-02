@@ -27,7 +27,7 @@ sed -i -e "s#@REQS#$DUMMYREQS#g" cmdfile
 cp shore-kits/run-templates/shore.conf.template shore.conf
 sed -i -e "s#@NTHREADS#$THREADS#g" shore.conf
 
-chrt -r 99 ./shore-kits/shore_kits_server_networked -i cmdfile &
+TBENCH_SERVER_PORT=${PORT} chrt -r 99 ./shore-kits/shore_kits_server_networked -i cmdfile &
 sleep 5
 echo "[SERVER]: Clients can start...."
 wait $!
