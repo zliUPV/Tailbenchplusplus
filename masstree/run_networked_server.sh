@@ -3,6 +3,8 @@
 SERVER_PORT=${1}
 THREADS=${2}
 
+source ../configs.sh
+
 TBENCH_SERVER_PORT=${SERVER_PORT} ./mttest_server_networked -j${THREADS} mycsba masstree &
 
 sleep 5 # Allow server to come up

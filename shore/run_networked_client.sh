@@ -2,6 +2,8 @@
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+source ../configs.sh
+
 SERVER=${1}
 SERVER_PORT=${2}
 WARMUP=${3}
