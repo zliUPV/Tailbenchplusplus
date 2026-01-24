@@ -499,15 +499,15 @@ void NetworkedServer::finish()
 // SERVER NEW CONNECTIONS //
 bool NetworkedServer::checkNewClient(fd_set *fdSet)
 {
+    // OVERHEAD MEASUREMENT - Start (always measure)
+    uint64_t overhead_start_ns = getCurNs();
+    
     struct sockaddr_storage clientAddr;
     socklen_t clientAddrSize;
     std::cout << "Checking new connection" << std::endl;
     bool res = false;
     if (FD_ISSET(listenFd, fdSet))
     {
-        // OVERHEAD MEASUREMENT - Start
-        uint64_t overhead_start_ns = getCurNs();
-        
         clientAddrSize = sizeof(clientAddr);
         memset(&clientAddr, 0, clientAddrSize);
 
@@ -518,6 +518,13 @@ bool NetworkedServer::checkNewClient(fd_set *fdSet)
         if (clientFd == -1)
         {
             std::cerr << "accept() failed: " << strerror(errno) << std::endl;
+            // OVERHEAD MEASUREMENT - End (error case)
+            uint64_t overhead_end_ns = getCurNs();
+            std::ofstream overhead_file("overhead_server_checkNewClient.log", std::ios::app);
+            if (overhead_file.is_open()) {
+                overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+                overhead_file.close();
+            }
             return false;
         }
 
@@ -528,19 +535,26 @@ bool NetworkedServer::checkNewClient(fd_set *fdSet)
             std::cerr << "setsockopt(TCP_NODELAY) failed: " << strerror(errno)
                       << std::endl;
             close(clientFd);
+            // OVERHEAD MEASUREMENT - End (error case)
+            uint64_t overhead_end_ns = getCurNs();
+            std::ofstream overhead_file("overhead_server_checkNewClient.log", std::ios::app);
+            if (overhead_file.is_open()) {
+                overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+                overhead_file.close();
+            }
             return false;
         }
 
         clientFds.push_back(clientFd);
         res = true;
-        
-        // OVERHEAD MEASUREMENT - End, write to file
-        uint64_t overhead_end_ns = getCurNs();
-        std::ofstream overhead_file("overhead_server_checkNewClient.log", std::ios::app);
-        if (overhead_file.is_open()) {
-            overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
-            overhead_file.close();
-        }
+    }
+    
+    // OVERHEAD MEASUREMENT - End (always write)
+    uint64_t overhead_end_ns = getCurNs();
+    std::ofstream overhead_file("overhead_server_checkNewClient.log", std::ios::app);
+    if (overhead_file.is_open()) {
+        overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+        overhead_file.close();
     }
     return res;
 }
