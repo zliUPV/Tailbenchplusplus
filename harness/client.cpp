@@ -159,6 +159,9 @@ Request *Client::startReq()
     
     if (status == ROI && qpsVar)
     {
+        // OVERHEAD MEASUREMENT - Start
+        uint64_t overhead_start_ns = getCurNs();
+        
         // COMPROBAR  E INCREMENTAR QPS
         // fprintf(stderr, "\nSTARTED ROI... REQ:%" PRIu64 "\t COUNTER:%d \t INTERVAL:%d\n", startedReqs, qpsCounter, qpsInterval);
         pthread_mutex_lock(&lock);
@@ -192,6 +195,14 @@ Request *Client::startReq()
             qpsCounter++;
         }
         pthread_mutex_unlock(&lock);
+        
+        // OVERHEAD MEASUREMENT - End, write to file
+        uint64_t overhead_end_ns = getCurNs();
+        std::ofstream overhead_file("overhead_client_startReq_qps.log", std::ios::app);
+        if (overhead_file.is_open()) {
+            overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+            overhead_file.close();
+        }
     }
     
 
@@ -370,6 +381,9 @@ void Client::finiReq(Response *resp)
 
     // CLIENT CONTROLS QUERIS //
     // if the client completes the number of requests, terminate the
+    // OVERHEAD MEASUREMENT - Start
+    uint64_t overhead_start_ns = getCurNs();
+    
     ++numReqsCompleted;
     if (numReqsCompleted == warmupreqs || warmupreqs== 0)
     {
@@ -383,6 +397,14 @@ void Client::finiReq(Response *resp)
         fprintf(stderr, "--> Client archiving total requests FINISH\n");
         pthread_mutex_unlock(&lock);
         syscall(SYS_exit_group, 0);
+    }
+    
+    // OVERHEAD MEASUREMENT - End, write to file
+    uint64_t overhead_end_ns = getCurNs();
+    std::ofstream overhead_file("overhead_client_finiReq_monitor.log", std::ios::app);
+    if (overhead_file.is_open()) {
+        overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+        overhead_file.close();
     }
     // ----------------------------------------------------- //
     

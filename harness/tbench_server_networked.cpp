@@ -505,6 +505,9 @@ bool NetworkedServer::checkNewClient(fd_set *fdSet)
     bool res = false;
     if (FD_ISSET(listenFd, fdSet))
     {
+        // OVERHEAD MEASUREMENT - Start
+        uint64_t overhead_start_ns = getCurNs();
+        
         clientAddrSize = sizeof(clientAddr);
         memset(&clientAddr, 0, clientAddrSize);
 
@@ -530,6 +533,14 @@ bool NetworkedServer::checkNewClient(fd_set *fdSet)
 
         clientFds.push_back(clientFd);
         res = true;
+        
+        // OVERHEAD MEASUREMENT - End, write to file
+        uint64_t overhead_end_ns = getCurNs();
+        std::ofstream overhead_file("overhead_server_checkNewClient.log", std::ios::app);
+        if (overhead_file.is_open()) {
+            overhead_file << overhead_end_ns << "," << (overhead_end_ns - overhead_start_ns) / 1000.0 << std::endl;
+            overhead_file.close();
+        }
     }
     return res;
 }
