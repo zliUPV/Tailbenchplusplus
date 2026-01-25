@@ -21,6 +21,7 @@ WARMUP=${3}
 MAXREQ=${4}
 QPS=${5}
 THREADS=${6}
+TBENCH_ID=${7}
 
 export TBENCH_QPS=${QPS}
 export TBENCH_SERVER=${SERVER}
@@ -29,6 +30,7 @@ export TBENCH_CLIENT_THREADS=${THREADS}
 export TBENCH_MINSLEEPNS=10000
 export TBENCH_MAXREQS=${MAXREQ}
 export TBENCH_WARMUPREQS=${WARMUP}
+export TBENCH_ID=${TBENCH_ID}
 
 if [[ -d libtbench_jni.so ]]; then
   rm libtbench_jni.so

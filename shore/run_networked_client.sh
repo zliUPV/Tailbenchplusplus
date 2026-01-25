@@ -8,6 +8,7 @@ WARMUP=${3}
 MAXREQ=${4}
 QPS=${5}
 THREADS=${6}
+TBENCH_ID=${7}
 
 DUMMYREQS=1000000
 
@@ -30,7 +31,7 @@ sed -i -e "s#@NTHREADS#$THREADS#g" shore.conf
 
 TBENCH_WARMUPREQS=${WARMUP} TBENCH_MAXREQS=${MAXREQ} TBENCH_SERVER=${SERVER} \
   TBENCH_SERVER_PORT=${SERVER_PORT} TBENCH_CLIENT_THREADS=${THREADS} TBENCH_QPS=${QPS} \
-  TBENCH_MINSLEEPNS=10000 chrt -r 99 ./shore-kits/shore_kits_client_networked -i cmdfile &
+  TBENCH_MINSLEEPNS=10000 TBENCH_ID=${TBENCH_ID} chrt -r 99 ./shore-kits/shore_kits_client_networked -i cmdfile &
 
 echo "[CLIENT] : STARTED"
 wait $!

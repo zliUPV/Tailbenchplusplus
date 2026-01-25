@@ -5,6 +5,7 @@ SERVER=${2}
 SERVER_PORT=${3}
 QPS=${4}
 THREADS=${5}
+TBENCH_ID=${6}
 
 cd ${APP}/
 
