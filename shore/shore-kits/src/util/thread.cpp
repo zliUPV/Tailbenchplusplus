@@ -40,9 +40,7 @@
 #undef DISABLE_THREAD_POOL
 
 
-inline c_str errno_to_str(int err=errno) {
-    return strerror(err);
-}
+
 
 
 
@@ -112,11 +110,7 @@ inline c_str errno_to_str(int err=errno) {
 
 
 
-DEFINE_EXCEPTION(Unreachable);
-DEFINE_EXCEPTION(BadAlloc);
-DEFINE_EXCEPTION(OutOfRange);
-DEFINE_EXCEPTION(FileException);
-DEFINE_EXCEPTION(BdbException);
+
 
 #ifdef __GCC
 inline void unreachable() ATTRIBUTE(noreturn);

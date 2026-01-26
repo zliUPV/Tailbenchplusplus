@@ -132,25 +132,7 @@ public:
   virtual ~QPipeException() throw() { }
 };
 
-#define DEFINE_EXCEPTION(Name) \
-    class Name : public QPipeException { \
-    public: \
-        Name(const char* filename, int line_num, const char* function_name, \
-             const char* m) \
-            : QPipeException(filename, line_num, function_name, m) \
-            { \
-            } \
-    }
 
-inline c_str errno_to_str(int err=errno) {
-    return strerror(err);
-}
-
-DEFINE_EXCEPTION(Unreachable);
-DEFINE_EXCEPTION(BadAlloc);
-DEFINE_EXCEPTION(OutOfRange);
-DEFINE_EXCEPTION(FileException);
-DEFINE_EXCEPTION(BdbException);
 
 #ifdef __GCC
 inline void unreachable() ATTRIBUTE(noreturn);
@@ -241,7 +223,7 @@ void print_live_strings() {
 }
 #endif
 
-DEFINE_EXCEPTION(BadAlloc);
+
 
 c_str::c_str(const char* str, ...)
     : _data(NULL)

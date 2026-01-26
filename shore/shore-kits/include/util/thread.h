@@ -42,28 +42,28 @@
 #include "util/exception.h"
 #include "util/randgen.h"
 
+// Redefinition bug
+// class QPipeException : public std::exception
+// {
 
-class QPipeException : public std::exception
-{
+// private:
 
-private:
+//   c_str _message;
 
-  c_str _message;
+// public:
 
-public:
+//   QPipeException(const char* filename, int line_num, const char* function_name,
+//                  c_str const &m)
+//     : _message(c_str("%s:%d (%s):%s", filename, line_num, function_name, m.data()))
+//   {
+//   }
 
-  QPipeException(const char* filename, int line_num, const char* function_name,
-                 c_str const &m)
-    : _message(c_str("%s:%d (%s):%s", filename, line_num, function_name, m.data()))
-  {
-  }
-
-  virtual const char* what() const throw() {
-    return _message.data();
-  }
+//   virtual const char* what() const throw() {
+//     return _message.data();
+//   }
  
-  virtual ~QPipeException() throw() { }
-};
+//   virtual ~QPipeException() throw() { }
+// };
 
 #define DEFINE_EXCEPTION(Name) \
     class Name : public QPipeException { \
