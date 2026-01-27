@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DIR=/home/master/Documents/Tailbenchplusplus/
-source ${DIR}configs.sh
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${DIR}/../configs.sh
 
 SERVER=${1}
 SERVER_PORT=${2}
@@ -11,7 +11,7 @@ QPS=${5}
 THREADS=${6}
 TBENCH_ID=${7}
 
-AUDIO_SAMPLES='/home/master/Documents/Tailbenchplusplus/sphinx/audio_samples'
+AUDIO_SAMPLES=/home/${USER_NAME}/Tailbenchplusplus/sphinx/audio_samples
 
 TBENCH_WARMUPREQS=${WARMUP} TBENCH_MAXREQS=${MAXREQ} TBENCH_ID=${TBENCH_ID} TBENCH_SERVER=${SERVER} \
   TBENCH_SERVER_PORT=${SERVER_PORT} TBENCH_CLIENT_THREADS=${THREADS} \

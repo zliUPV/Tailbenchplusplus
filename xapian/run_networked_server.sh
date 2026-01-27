@@ -1,8 +1,9 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH=/home/master/Documents/Tailbenchplusplus/xapian/xapian-core-1.2.13/install/lib
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${DIR}/../configs.sh
 
-source /home/master/Documents/Tailbenchplusplus/configs.sh
+export LD_LIBRARY_PATH=${DIR}/xapian-core-1.2.13/install/lib
 
 SERVER_PORT=${1}
 THREADS=${2}

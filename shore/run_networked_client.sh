@@ -1,6 +1,7 @@
 #!/bin/bash
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${DIR}/../configs.sh
 
 SERVER=${1}
 SERVER_PORT=${2}

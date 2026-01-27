@@ -1,6 +1,8 @@
 #!/bin/bash
 # ops-per-worker is set to a very large value, so that TBENCH_MAXREQS controls how
 # many ops are performed
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${DIR}/../configs.sh
 NUM_WAREHOUSES=1
 
 SERVER_PORT=${1}
